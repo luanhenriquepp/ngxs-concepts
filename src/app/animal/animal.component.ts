@@ -11,9 +11,7 @@ import {Observable} from "rxjs";
 })
 export class AnimalComponent implements OnInit {
   data!: any[]
-
   constructor(private store: Store) { }
-
   ngOnInit(): void {
     this.getAnimal();
   }
