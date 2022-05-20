@@ -25,8 +25,4 @@ export class AnimalComponent implements OnInit, OnDestroy {
       this.data = resp;
     })
   }
-
-  ngOnDestroy(): void {
-
-  }
 }
