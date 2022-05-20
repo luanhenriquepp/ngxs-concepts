@@ -8,6 +8,8 @@ import {NgxsModule} from "@ngxs/store";
 import { AnimalComponent } from './animal/animal.component';
 import {AngularMaterialModule} from "./core/angular-material.module";
 import {AnimalState} from "./animal/store/animal.state";
+import {HttpClientModule} from "@angular/common/http";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -16,10 +18,12 @@ import {AnimalState} from "./animal/store/animal.state";
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgxsModule.forRoot([AnimalState]),
-    AngularMaterialModule
+    AngularMaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
