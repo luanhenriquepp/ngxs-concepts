@@ -10,6 +10,8 @@ import {AngularMaterialModule} from "./core/angular-material.module";
 import {AnimalState} from "./animal/store/animal.state";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
+import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import {CommonModule} from "@angular/common";
     AppRoutingModule,
     BrowserAnimationsModule,
     NgxsModule.forRoot([AnimalState]),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
     AngularMaterialModule,
     HttpClientModule
   ],
