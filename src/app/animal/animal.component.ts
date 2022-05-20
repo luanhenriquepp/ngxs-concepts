@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
   templateUrl: './animal.component.html',
   styleUrls: ['./animal.component.scss']
 })
-export class AnimalComponent implements OnInit, OnDestroy {
+export class AnimalComponent implements OnInit {
   data!: any[]
 
   constructor(private store: Store) { }
