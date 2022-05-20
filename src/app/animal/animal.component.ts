@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
 import { GetAnimal} from "./store/animal.actions";
 import {AnimalInterface, AnimalState} from "./store/animal.state";
@@ -9,8 +9,8 @@ import {Observable} from "rxjs";
   templateUrl: './animal.component.html',
   styleUrls: ['./animal.component.scss']
 })
-export class AnimalComponent implements OnInit {
-  data!: []
+export class AnimalComponent implements OnInit, OnDestroy {
+  data!: any[]
 
   constructor(private store: Store) { }
 
@@ -21,6 +21,12 @@ export class AnimalComponent implements OnInit {
   @Select(AnimalState.getAnimalSelector) getAnimalObs$: Observable<AnimalInterface[]> | undefined;
   getAnimal() {
     this.store.dispatch(new GetAnimal())
-    this.getAnimalObs$?.subscribe(resp => resp)
+    this.getAnimalObs$?.subscribe(resp => {
+      this.data = resp;
+    })
+  }
+
+  ngOnDestroy(): void {
+
   }
 }
