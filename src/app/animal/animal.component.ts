@@ -21,8 +21,6 @@ export class AnimalComponent implements OnInit {
   @Select(AnimalState.getAnimalSelector) getAnimalObs$: Observable<AnimalInterface[]> | undefined;
   getAnimal() {
     this.store.dispatch(new GetAnimal())
-    this.getAnimalObs$?.subscribe(resp => {
-    return resp;
-    })
+    this.getAnimalObs$?.subscribe(resp => resp)
   }
 }
