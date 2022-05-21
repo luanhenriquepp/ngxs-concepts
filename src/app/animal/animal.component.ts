@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
-import {AddAnimal, GetAnimal} from "./store/animal.actions";
+import {AddAnimal, GetAnimals} from "./store/animal.actions";
 import {AnimalInterface, AnimalState} from "./store/animal.state";
 import {Observable} from "rxjs";
 
@@ -20,7 +20,7 @@ export class AnimalComponent implements OnInit {
 
   @Select(AnimalState.getAnimalsSelector) getAnimalsObs$: Observable<AnimalInterface[]> | undefined;
   getAnimal() {
-    this.store.dispatch(new GetAnimal())
+    this.store.dispatch(new GetAnimals())
     this.getAnimalsObs$?.subscribe(resp => {
       console.log(resp)
       this.data = resp;
@@ -29,6 +29,5 @@ export class AnimalComponent implements OnInit {
 
   addAnimal(name: string) {
     this.store.dispatch(new AddAnimal(name))
-    this.getAnimal();
   }
 }
