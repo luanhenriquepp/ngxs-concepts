@@ -1,4 +1,4 @@
-export class  GetAnimal {
+export class  GetAnimals {
   static readonly type = '[Animal] Get Animal';
   constructor() {}
 }

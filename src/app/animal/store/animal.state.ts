@@ -1,6 +1,6 @@
 import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Injectable} from "@angular/core";
-import {AddAnimal, GetAnimal} from "./animal.actions";
+import {AddAnimal, GetAnimals} from "./animal.actions";
 import {AnimalService} from '../service/animal.service'
 import {tap} from "rxjs/operators";
 
@@ -30,7 +30,7 @@ export class AnimalState {
     return state.animals
   }
 
-  @Action(GetAnimal)
+  @Action(GetAnimals)
   getAnimalStateAction(ctx: StateContext<AnimalStateModel>){
     return this.service.getAnimals().pipe(tap((item) => {
       const state  = ctx.getState();
@@ -51,6 +51,4 @@ export class AnimalState {
       animals: [...state.animals, {name: payload.name}]
     })
   }
-
-
 }
