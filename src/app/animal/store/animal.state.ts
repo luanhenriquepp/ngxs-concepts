@@ -1,6 +1,6 @@
 import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Injectable} from "@angular/core";
-import {GetAnimal} from "./animal.actions";
+import {AddAnimal, GetAnimal} from "./animal.actions";
 import {AnimalService} from '../service/animal.service'
 import {tap} from "rxjs/operators";
 
@@ -10,17 +10,16 @@ export interface AnimalInterface {
 
 export interface AnimalStateModel {
   addAnimal: AnimalInterface[],
-  getAnimal: AnimalInterface[]
-
+  animals: AnimalInterface[]
 }
+
 @State<AnimalStateModel>({
   name: "Animal",
   defaults: {
     addAnimal: [],
-    getAnimal: [],
+    animals: [],
   }
 })
-
 
 @Injectable()
 export class AnimalState {
@@ -29,19 +28,31 @@ export class AnimalState {
   }
 
   @Selector()
-  static getAnimalSelector(state: AnimalStateModel) {
-    return state.getAnimal
+  static getAnimalsSelector(state: AnimalStateModel) {
+    return state.animals
   }
 
   @Action(GetAnimal)
   getAnimalStateAction(ctx: StateContext<AnimalStateModel>){
-    return this.service.getAnimal().pipe(tap((item) => {
+    return this.service.getAnimals().pipe(tap((item) => {
       const state  = ctx.getState();
       ctx.setState({
         ...state,
-        getAnimal: item
+        animals: item
       });
 
     }))
   }
+
+  @Action(AddAnimal)
+  addAnimalStateAction(ctx: StateContext<AnimalStateModel>, payload: AddAnimal) {
+    this.service.addAnimal(payload.name)
+    const state = ctx.getState()
+    ctx.setState({
+      ...state,
+      animals: [...state.animals, {name: payload.name}]
+    })
+  }
+
+
 }

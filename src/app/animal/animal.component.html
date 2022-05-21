@@ -1,3 +1,9 @@
 <div *ngFor="let animal of data">
   <span>{{animal.name}}</span>
 </div>
+
+
+<div>
+  <input #input type="text">
+  <button (click)="addAnimal(input.value)">Adicionar animal</button>
+</div>

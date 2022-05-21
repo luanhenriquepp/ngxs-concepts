@@ -1,4 +1,9 @@
 export class  GetAnimal {
-  static readonly type = '[Zoo] Get Animal';
+  static readonly type = '[Animal] Get Animal';
   constructor() {}
+}
+
+export class  AddAnimal {
+  static readonly type = '[Animal] Add Animal';
+  constructor(public name: string) {}
 }
