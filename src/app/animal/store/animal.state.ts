@@ -9,14 +9,12 @@ export interface AnimalInterface {
 }
 
 export interface AnimalStateModel {
-  addAnimal: AnimalInterface[],
   animals: AnimalInterface[]
 }
 
 @State<AnimalStateModel>({
   name: "Animal",
   defaults: {
-    addAnimal: [],
     animals: [],
   }
 })
