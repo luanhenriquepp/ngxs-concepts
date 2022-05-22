@@ -3,10 +3,11 @@ import {Injectable} from "@angular/core";
 import {AddAnimal, GetAnimals, RemoveAnimal} from "./animal.actions";
 import {AnimalService} from '../service/animal.service'
 import {tap} from "rxjs/operators";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface AnimalInterface {
   name: string;
-  id: number;
+  id: string;
 }
 
 export interface AnimalStateModel {
@@ -23,7 +24,7 @@ export interface AnimalStateModel {
 @Injectable()
 export class AnimalState {
 
-  constructor(private service: AnimalService) {
+  constructor(private _service: AnimalService, private _snackBar: MatSnackBar) {
   }
 
   @Selector()
@@ -33,7 +34,7 @@ export class AnimalState {
 
   @Action(GetAnimals)
   getAnimalStateAction(ctx: StateContext<AnimalStateModel>){
-    return this.service.getAnimals().pipe(tap((item) => {
+    return this._service.getAnimals().pipe(tap((item) => {
       const state  = ctx.getState();
       ctx.setState({
         ...state,
@@ -45,7 +46,9 @@ export class AnimalState {
 
   @Action(AddAnimal)
   addAnimalStateAction(ctx: StateContext<AnimalStateModel>, payload: AddAnimal) {
-    this.service.addAnimal(payload)
+    this._service.addAnimal(payload).subscribe(resp => {
+      return this._snackBar.open(resp.message, 'close')
+    })
     const state = ctx.getState()
     ctx.setState({
       ...state,
@@ -55,7 +58,9 @@ export class AnimalState {
 
   @Action(RemoveAnimal)
   removeAnimalStateAction(ctx: StateContext<AnimalStateModel>, payload: RemoveAnimal) {
-    this.service.removeAnimal(payload.id)
+    this._service.removeAnimal(payload.id).subscribe(resp => {
+      return this._snackBar.open(resp.message, 'close')
+    })
     const state = ctx.getState();
     ctx.setState({
       ...state,

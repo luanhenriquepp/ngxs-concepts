@@ -3,6 +3,8 @@ import {Select, Store} from "@ngxs/store";
 import {AddAnimal, GetAnimals, RemoveAnimal} from "./store/animal.actions";
 import {AnimalInterface, AnimalState} from "./store/animal.state";
 import {Observable} from "rxjs";
+import {FormControl} from "@angular/forms";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-animal',
@@ -11,8 +13,9 @@ import {Observable} from "rxjs";
 })
 export class AnimalComponent implements OnInit {
   data!: any[]
+  animalFormControl: FormControl =  new FormControl();
 
-  constructor(private store: Store) { }
+  constructor(private _store: Store) { }
 
   ngOnInit(): void {
     this.getAnimal();
@@ -21,17 +24,18 @@ export class AnimalComponent implements OnInit {
   @Select(AnimalState.getAnimalsSelector)
   getAnimalsObs$!: Observable<AnimalInterface[]>;
   getAnimal() {
-    this.store.dispatch(new GetAnimals())
+    this._store.dispatch(new GetAnimals())
     this.getAnimalsObs$?.subscribe((resp: any) => {
       this.data = resp;
     })
   }
 
   addAnimal(name: string) {
-    this.store.dispatch(new AddAnimal(name , Math.floor(Math.random() * (999 -1) + 1)))
+    this._store.dispatch(new AddAnimal(name , uuidv4()))
+    this.animalFormControl.setValue(null)
   }
 
-  removeAnimal(id: number) {
-    this.store.dispatch(new RemoveAnimal(id))
+  removeAnimal(id: string) {
+    this._store.dispatch(new RemoveAnimal(id))
   }
 }

@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngxs-studing": {
+    "ngxs-studying": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngxs-studing",
+            "outputPath": "dist/ngxs-studying",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -34,12 +34,20 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
           },
           "configurations": {
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
             "production": {
               "budgets": [
                 {
@@ -70,16 +78,20 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngxs-studing:build:production"
+              "browserTarget": "ngxs-studying:build:production"
             },
             "development": {
-              "browserTarget": "ngxs-studing:build:development"
+              "browserTarget": "ngxs-studying:build:development"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "ngxs-studying:build:hmr"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +99,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngxs-studing:build"
+            "browserTarget": "ngxs-studying:build"
           }
         },
         "test": {
@@ -103,7 +115,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -112,5 +124,5 @@
       }
     }
   },
-  "defaultProject": "ngxs-studing"
+  "defaultProject": "ngxs-studying"
 }
