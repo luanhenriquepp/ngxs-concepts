@@ -1,10 +1,13 @@
 <section>
   <mat-list role="list" *ngFor="let animal of data">
-    <mat-list-item role="list-item">{{animal.name}} <mat-icon (click)="removeAnimal(animal.id)">close</mat-icon></mat-list-item>
+    <mat-list-item role="list-item">
+      {{animal.name}}
+      <mat-icon (click)="removeAnimal(animal.id)">close</mat-icon>
+    </mat-list-item>
   </mat-list>
 
   <mat-form-field appearance="outline">
     <input matInput placeholder="Type animal name" [formControl]="animalFormControl">
   </mat-form-field>
-  <button (click)="addAnimal(animalFormControl.value)" mat-raised-button color="primary">Cadastrar</button>
+  <button (click)="addAnimal(animalFormControl.value)" mat-raised-button color="primary">Submit</button>
 </section>
