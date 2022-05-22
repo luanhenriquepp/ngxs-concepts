@@ -1,5 +1,5 @@
 <div *ngFor="let animal of data">
-  <span>{{animal.name}}</span>
+  <span>{{animal.name}} <mat-icon (click)="removeAnimal(animal.id)">close</mat-icon></span>
 </div>
 
 

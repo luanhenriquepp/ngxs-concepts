@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
-import {AddAnimal, GetAnimals} from "./store/animal.actions";
+import {AddAnimal, GetAnimals, RemoveAnimal} from "./store/animal.actions";
 import {AnimalInterface, AnimalState} from "./store/animal.state";
 import {Observable} from "rxjs";
 
@@ -22,12 +22,15 @@ export class AnimalComponent implements OnInit {
   getAnimal() {
     this.store.dispatch(new GetAnimals())
     this.getAnimalsObs$?.subscribe(resp => {
-      console.log(resp)
       this.data = resp;
     })
   }
 
   addAnimal(name: string) {
-    this.store.dispatch(new AddAnimal(name))
+    this.store.dispatch(new AddAnimal(name , Math.floor(Math.random() * (999 -1) + 1)))
+  }
+
+  removeAnimal(id: number) {
+    this.store.dispatch(new RemoveAnimal(id))
   }
 }

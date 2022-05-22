@@ -5,5 +5,10 @@ export class  GetAnimals {
 
 export class  AddAnimal {
   static readonly type = '[Animal] Add Animal';
-  constructor(public name: string) {}
+  constructor(public name: string, public id: number){}
+}
+
+export class RemoveAnimal {
+  static readonly type = '[Animal] Remove Animal';
+  constructor(public id: number) {}
 }
